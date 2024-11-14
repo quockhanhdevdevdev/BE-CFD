@@ -1,19 +1,22 @@
-package edu.cfd.e_learningPlatform.dto;
+package edu.cfd.e_learningPlatform.dto.response;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
-@Data
-@NoArgsConstructor
+@Getter
 @AllArgsConstructor
-public class LectureUserDto {
+@Setter
+@NoArgsConstructor
+public class LectureUserResponse {
     private Long id;
     private String userId;
     private Long lectureId;
-    private String choseOption;
+    private List<Long> choseOption;
     private LocalDateTime updateAt;
     private boolean doneVideo;
     private boolean doneAssignment;
