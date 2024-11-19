@@ -47,4 +47,7 @@ public class Course {
     @JsonManagedReference
     private List<Section> sections = new ArrayList<>();
 
+    @OneToMany(mappedBy = "course")
+    private List<Message> messages = new ArrayList<>();
+
 }

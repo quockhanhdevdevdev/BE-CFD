@@ -1,0 +1,1 @@
+alter table message  modify  course_id bigint null

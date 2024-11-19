@@ -43,4 +43,6 @@ public abstract class CourseMapper {
     @Mapping(source = "instructor", target = "instructor", qualifiedByName = "userToUserResponse")
     @Mapping(source = "category.id", target = "categoryId")
     public abstract List<CourseResponse> toCourseResponses(List<Course> courses);
+
+
 }

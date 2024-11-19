@@ -15,6 +15,7 @@ public interface WithdrawRepository extends JpaRepository<Withdraw,Long> {
     List<Withdraw> findByUser(User user);
 
     List<Withdraw> findByStatus(WithdrawStatus withdrawStatus);
+
     @Query("SELECT SUM(w.price) FROM Withdraw w WHERE w.user.id = :userId AND w.status = :status")
     BigDecimal sumAmountByUserIdAndStatus(@Param("userId") String userId, @Param("status") WithdrawStatus status);
 

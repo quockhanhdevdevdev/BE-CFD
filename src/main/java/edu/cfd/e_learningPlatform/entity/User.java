@@ -5,6 +5,7 @@ import edu.cfd.e_learningPlatform.enums.Gender;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.mapstruct.Named;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -70,4 +71,10 @@ public class User {
     @JoinColumn(name = "role_id")
     private Role roleEntity;
     private BigDecimal price;
+
+    @OneToMany(mappedBy = "userTo")
+    private List<Message> messagesTo;
+
+    @OneToMany(mappedBy = "userFrom")
+    private List<Message> messagesFrom;
 }
