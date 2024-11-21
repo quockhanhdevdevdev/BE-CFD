@@ -9,10 +9,13 @@ import edu.cfd.e_learningPlatform.entity.Message;
 
 public interface MessageRepository extends JpaRepository<Message, Long> {
 
-    @Query(
-            value = "Select * from message m " + "where (m.user_to = :idUserTo and m.user_from = :idUserFrom)"
+    @Query(value = "Select * from message m " + "where (m.user_to = :idUserTo and m.user_from = :idUserFrom)"
                     + "or (m.user_to = :idUserFrom and m.user_from = :idUserTo) "
-                    + "order by m.created_at asc ",
-            nativeQuery = true)
-    List<Message> findMessage(String idUserTo, String idUserFrom);
+                    + "order by m.created_at asc ", nativeQuery = true)
+    List<Message> findMessageToUser(String idUserTo, String idUserFrom);
+
+    @Query(value = "Select * from message m " +
+                    "where m.course_id = :idCourse " +
+                    "order by m.created_at asc ", nativeQuery = true)
+    List<Message> findMessageToCourse(Long idCourse);
 }

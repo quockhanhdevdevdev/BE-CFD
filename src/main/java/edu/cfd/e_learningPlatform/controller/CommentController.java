@@ -36,7 +36,7 @@ public class CommentController {
     }
 
     @MessageMapping("/comments/delete")
-    @SendTo("/topic/idComment")
+    @SendTo("/topic/delete")
     public Long deleteComment(@RequestBody CommentVideoResponse commentVideoResponse) {
         commentService.deleteComment(commentVideoResponse.getId());
         return commentVideoResponse.getId();

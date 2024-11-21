@@ -2,7 +2,11 @@ package edu.cfd.e_learningPlatform.controller;
 
 import java.util.List;
 
+import edu.cfd.e_learningPlatform.dto.response.EnrollCourseResponse;
+import edu.cfd.e_learningPlatform.service.CourseService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.*;
 
 import edu.cfd.e_learningPlatform.dto.request.MessageRequest;
@@ -18,15 +22,39 @@ import lombok.experimental.FieldDefaults;
 @RequiredArgsConstructor
 public class MessageController {
     MessageService messageService;
+    CourseService courseService;
 
-    @GetMapping("/{idUserTo}/{idUserFrom}")
-    public ResponseEntity<List<MessageResponse>> getMessages(
+    @GetMapping("toUser/{idUserTo}/{idUserFrom}")
+    public ResponseEntity<List<MessageResponse>> getMessagesToUser(
             @PathVariable String idUserTo, @PathVariable String idUserFrom) {
-        return ResponseEntity.ok(messageService.getMessages(idUserTo, idUserFrom));
+        return ResponseEntity.ok(messageService.getMessagesToUser(idUserTo, idUserFrom));
     }
 
-    @PostMapping("/send")
-    public ResponseEntity<MessageResponse> sendMessage(@RequestBody MessageRequest messageRequest) {
-        return ResponseEntity.ok(messageService.addMessage(messageRequest));
+    @GetMapping("toCourse/{idCourse}")
+    public ResponseEntity<List<MessageResponse>> getMessagesToCourse(
+            @PathVariable Long idCourse) {
+        return ResponseEntity.ok(messageService.getMessagesToCourse(idCourse));
+    }
+
+    @MessageMapping("/messages/send")
+    @SendTo("/topic/messages")
+    public MessageResponse sendMessage(@RequestBody MessageRequest messageRequest) {
+        return messageService.addMessage(messageRequest);
+    }
+
+    @MessageMapping("/messages/delete")
+    @SendTo("/topic/delete")
+    public Long deleteMessage(@RequestBody MessageRequest messageRequest) {
+        return messageService.deleteMessage(messageRequest.getId());
+    }
+
+    @GetMapping("/getEnrollCourse/{idStudent}")
+    public ResponseEntity<List<EnrollCourseResponse>> getEnrollCourse(@PathVariable String idStudent) {
+        return ResponseEntity.ok(courseService.getEnrollCourses(idStudent));
+    }
+
+    @GetMapping("/getCourseIntructor/{idIntructor}")
+    public ResponseEntity<List<EnrollCourseResponse>> getCourseIntructor(@PathVariable String idIntructor) {
+        return ResponseEntity.ok(courseService.getCoursesIntructor(idIntructor));
     }
 }

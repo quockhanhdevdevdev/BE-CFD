@@ -2,6 +2,7 @@ package edu.cfd.e_learningPlatform.service.Impl;
 
 import edu.cfd.e_learningPlatform.dto.request.CourseCreationRequest;
 import edu.cfd.e_learningPlatform.dto.response.CourseResponse;
+import edu.cfd.e_learningPlatform.dto.response.EnrollCourseResponse;
 import edu.cfd.e_learningPlatform.entity.*;
 import edu.cfd.e_learningPlatform.mapstruct.CourseMapper;
 import edu.cfd.e_learningPlatform.repository.CategoryRepository;
@@ -144,5 +145,13 @@ public class CourseServiceImpl implements CourseService {
         courseRepository.deleteById(id);
     }
 
+    @Override
+    public List<EnrollCourseResponse> getEnrollCourses(String idStudent) {
+        return courseRepository.getCourseByUserPayment(idStudent);
+    }
 
+    @Override
+    public List<EnrollCourseResponse> getCoursesIntructor(String idIntructor) {
+        return courseRepository.getCourseByIntructor(idIntructor);
+    }
 }

@@ -29,10 +29,23 @@ public class MessageServiceImpl implements MessageService {
     MessageMapper messageMapper;
 
     @Override
-    public List<MessageResponse> getMessages(String idUserTo, String idUserFrom) {
+    public List<MessageResponse> getMessagesToUser(String idUserTo, String idUserFrom) {
         List<MessageResponse> messageRepons =
-                messageMapper.toMessageReponses(messageRepository.findMessage(idUserTo, idUserFrom));
+                messageMapper.toMessageReponses(messageRepository.findMessageToUser(idUserTo, idUserFrom));
         return messageRepons;
+    }
+
+    @Override
+    public List<MessageResponse> getMessagesToCourse(Long idCourse) {
+        List<MessageResponse> messageRepons =
+                messageMapper.toMessageReponses(messageRepository.findMessageToCourse(idCourse));
+        return messageRepons;
+    }
+
+    @Override
+    public Long deleteMessage(Long idMessage) {
+        messageRepository.deleteById(idMessage);
+        return idMessage;
     }
 
     @Override
