@@ -17,6 +17,8 @@ public class MessageRequest {
     private String idUserTo;
     private String idUserFrom;
     private Long idCourse;
+    private String urlImage;
+    private String urlFile;
     private LocalDateTime createdAt;
     private String type;
 }

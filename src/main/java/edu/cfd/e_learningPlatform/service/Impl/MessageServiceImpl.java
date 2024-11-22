@@ -30,8 +30,7 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public List<MessageResponse> getMessagesToUser(String idUserTo, String idUserFrom) {
-        List<MessageResponse> messageRepons =
-                messageMapper.toMessageReponses(messageRepository.findMessageToUser(idUserTo, idUserFrom));
+        List<MessageResponse> messageRepons = messageMapper.toMessageReponses(messageRepository.findMessageToUser(idUserTo, idUserFrom));
         return messageRepons;
     }
 

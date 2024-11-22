@@ -34,6 +34,10 @@ public class Message {
     @JoinColumn(name = "courseId")
     private Course course;
 
+    private String urlImage;
+
+    private String urlFile;
+
     private LocalDateTime createdAt;
 
     private String type;

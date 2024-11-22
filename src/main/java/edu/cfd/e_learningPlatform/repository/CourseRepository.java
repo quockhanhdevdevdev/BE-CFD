@@ -20,7 +20,7 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
 
     @Query("SELECT new edu.cfd.e_learningPlatform.dto.response.EnrollCourseResponse(c.id, c.coverImage, c.title) " +
             "FROM Course c JOIN Payment p ON c.id = p.course.id " +
-            "WHERE p.user.id = :idStudent")
+            "WHERE p.user.id = :idStudent and p.enrollment = true")
     List<EnrollCourseResponse> getCourseByUserPayment(String idStudent);
 
     @Query("SELECT new edu.cfd.e_learningPlatform.dto.response.EnrollCourseResponse(c.id, c.coverImage, c.title) " +

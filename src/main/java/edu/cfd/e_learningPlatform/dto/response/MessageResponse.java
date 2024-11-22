@@ -20,6 +20,8 @@ public class MessageResponse {
     private String idUserFrom;
     private String nameUserFrom;
     private Long idCourse;
+    private String urlImage;
+    private String urlFile;
     private String avatarUserFrom;
     private LocalDateTime createdAt;
     private String type;
